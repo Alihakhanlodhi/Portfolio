@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aliha Khan | Portfolio Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#12182b;
+      --panel2:#171f36;
+      --text:#f7f8fb;
+      --muted:#9ca8c7;
+      --accent:#8b5cf6;
+      --accent2:#22d3ee;
+      --line:rgba(255,255,255,.08);
+      --shadow:0 18px 55px rgba(0,0,0,.28);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;background:
+      radial-gradient(circle at 15% 10%,rgba(139,92,246,.16),transparent 24%),
+      radial-gradient(circle at 85% 25%,rgba(34,211,238,.12),transparent 20%),
+      var(--bg);
+      color:var(--text);font-family:Inter,system-ui,sans-serif;
+    }
+    .app{display:grid;grid-template-columns:270px 1fr;min-height:100vh}
+    aside{
+      position:sticky;top:0;height:100vh;padding:30px 22px;border-right:1px solid var(--line);
+      background:rgba(11,16,32,.78);backdrop-filter:blur(14px)
+    }
+    .brand{display:flex;gap:12px;align-items:center;margin-bottom:34px}
+    .logo{width:45px;height:45px;border-radius:15px;display:grid;place-items:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));font-weight:800}
+    .brand h2{font-size:17px;margin:0}.brand span{font-size:12px;color:var(--muted)}
+    nav a{
+      display:flex;align-items:center;gap:12px;color:#cbd3ea;text-decoration:none;
+      padding:12px 13px;border-radius:12px;margin:7px 0;font-size:14px
+    }
+    nav a:hover,nav a.active{background:rgba(139,92,246,.16);color:#fff}
+    .side-card{margin-top:26px;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+    .side-card p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
+    main{padding:34px 38px 60px;max-width:1500px;width:100%}
+    .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+    .topbar small{color:var(--muted)}
+    .status{font-size:12px;padding:9px 12px;border:1px solid rgba(34,211,238,.25);border-radius:999px;color:#8be9f5;background:rgba(34,211,238,.08)}
+    .hero{
+      display:grid;grid-template-columns:1.45fr .8fr;gap:22px;margin-bottom:24px
+    }
+    .card{background:linear-gradient(180deg,rgba(23,31,54,.92),rgba(18,24,43,.94));border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+    .hero-main{padding:38px;min-height:330px;position:relative;overflow:hidden}
+    .hero-main:after{content:"AK";position:absolute;right:-15px;bottom:-42px;font-size:170px;font-weight:800;color:rgba(255,255,255,.025)}
+    .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8be9f5;font-weight:700}
+    h1{font-family:"Playfair Display",serif;font-size:55px;line-height:1;margin:14px 0 16px}
+    .gradient{background:linear-gradient(90deg,#fff,#b59cff,#7ee7f2);-webkit-background-clip:text;color:transparent}
+    .hero p{color:var(--muted);line-height:1.75;max-width:690px}
+    .buttons{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+    .btn{padding:12px 16px;border-radius:12px;text-decoration:none;font-size:13px;font-weight:700}
+    .primary{background:linear-gradient(135deg,var(--accent),#6d55dd);color:#fff}
+    .secondary{border:1px solid var(--line);color:#fff;background:rgba(255,255,255,.03)}
+    .profile-card{padding:26px;display:flex;flex-direction:column;justify-content:center}
+    .avatar{width:95px;height:95px;border-radius:50%;display:grid;place-items:center;font-size:30px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));margin-bottom:18px}
+    .profile-card h3{margin:0 0 8px;font-size:22px}.profile-card p{font-size:13px;margin:3px 0}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+    .stat{padding:22px}.stat b{font-size:28px;display:block}.stat span{font-size:12px;color:var(--muted)}
+    section{margin-top:26px}
+    .section-head{display:flex;justify-content:space-between;align-items:end;margin:0 0 14px}
+    .section-head h2{margin:0;font-size:23px}.section-head p{margin:0;color:var(--muted);font-size:12px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .content-card{padding:24px}
+    .content-card h3{margin-top:0;font-size:16px}.content-card p{color:var(--muted);font-size:13px;line-height:1.7}
+    .skills{display:flex;gap:10px;flex-wrap:wrap}
+    .pill{font-size:12px;padding:9px 12px;border-radius:999px;background:rgba(139,92,246,.11);border:1px solid rgba(139,92,246,.22);color:#d8cbff}
+    .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .project{padding:20px;min-height:215px;display:flex;flex-direction:column}
+    .project .num{color:#7ee7f2;font-size:12px;font-weight:700}.project h3{font-size:18px;margin:12px 0 8px}
+    .project p{color:var(--muted);font-size:13px;line-height:1.6;flex:1}
+    .tags{display:flex;gap:7px;flex-wrap:wrap}.tags span{font-size:10px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;color:#b8c2dc}
+    .timeline{display:grid;gap:12px}.item{padding:16px 18px;border-left:3px solid var(--accent);background:rgba(255,255,255,.025);border-radius:0 12px 12px 0}
+    .item h4{margin:0 0 6px}.item p{margin:0;font-size:12px;color:var(--muted)}
+    footer{margin-top:34px;color:var(--muted);font-size:12px;text-align:center}
+    @media(max-width:980px){
+      .app{grid-template-columns:1fr}aside{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+      nav{display:flex;overflow:auto;gap:6px}nav a{white-space:nowrap}.side-card{display:none}
+      main{padding:26px 18px 45px}.hero,.grid-2{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.project-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:600px){h1{font-size:42px}.project-grid{grid-template-columns:1fr}.hero-main{padding:28px}.stats{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">
+      <div class="logo">AK</div>
+      <div><h2>Aliha Khan</h2><span>Personal Portfolio</span></div>
+    </div>
+    <nav>
+      <a class="active" href="#home">⌂ Overview</a>
+      <a href="#about">◉ About</a>
+      <a href="#skills">✦ Skills</a>
+      <a href="#internships">◈ Internships</a>
+      <a href="#projects">▦ Projects</a>
+      <a href="#education">⌁ Education</a>
+      <a href="#blog">✎ Blog</a>
+      <a href="#contact">✉ Contact</a>
+    </nav>
+    <div class="side-card">
+      <p><strong style="color:#fff">Portfolio Note</strong><br>
+      Replace the sample details with your real degree, university, skills, projects, email and social links.</p>
+    </div>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <div><small>Welcome to my digital space</small></div>
+      <div class="status">● Available for opportunities</div>
+    </div>
+
+    <section class="hero" id="home">
+      <div class="card hero-main">
+        <div class="eyebrow">Portfolio Dashboard</div>
+        <h1>Hi, I'm <span class="gradient">Aliha Khan</span></h1>
+        <p>
+          A motivated learner and aspiring professional focused on building practical,
+          creative and technology-driven projects. This dashboard brings together my
+          profile, skills, education, achievements and portfolio work in one place.
+        </p>
+        <div class="buttons">
+          <a class="btn primary" href="#projects">View My Work</a>
+          <a class="btn secondary" href="#contact">Contact Me</a>
+        </div>
+      </div>
+
+      <div class="card profile-card">
+        <div class="avatar">AK</div>
+        <h3>Aliha Khan</h3>
+        <p>BS Computer Science Student</p>
+        <p>📍 Pakistan</p>
+        <p>✉ aliha.k@gmail.com</p>
+        <p>🔗 <a href="https://www.linkedin.com/in/aliha-k-958343333?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" style="color:#8be9f5;text-decoration:none;">LinkedIn Profile</a></p>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="card stat"><b>06</b><span>Completed Internships</span></div>
+      <div class="card stat"><b>05</b><span>Unpaid Internships</span></div>
+      <div class="card stat"><b>01</b><span>Paid Internship</span></div>
+      <div class="card stat"><b>BSCS</b><span>Current Degree</span></div>
+    </div>
+
+    <section id="about">
+      <div class="section-head"><h2>About Me</h2><p>Personal introduction</p></div>
+      <div class="grid-2">
+        <div class="card content-card">
+          <h3>Profile</h3>
+          <p>
+            I am Aliha Khan, a BS Computer Science student with a strong interest in technology,
+            software development, problem-solving and practical project building. Alongside my
+            university studies, I have completed six internships — five unpaid and one paid —
+            which have helped me gain practical exposure, professional discipline and real-world experience.
+          </p>
+        </div>
+        <div class="card content-card">
+          <h3>Career Objective</h3>
+          <p>
+            To grow through hands-on projects, collaborative work and continuous learning,
+            while building a strong professional portfolio that reflects creativity, technical
+            ability, communication and reliability.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-head"><h2>Skills</h2><p>Edit according to your profile</p></div>
+      <div class="card content-card">
+        <div class="skills">
+          <span class="pill">Python</span>
+          <span class="pill">HTML</span>
+          <span class="pill">CSS</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">Problem Solving</span>
+          <span class="pill">Communication</span>
+          <span class="pill">Teamwork</span>
+          <span class="pill">Presentation</span>
+          <span class="pill">Canva / Design</span>
+          <span class="pill">Microsoft Office</span>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="internships">
+      <div class="section-head"><h2>Internship Experience</h2><p>6 internships completed</p></div>
+      <div class="project-grid">
+        <div class="card project">
+          <span class="num">01 / MARKETING</span>
+          <h3>Marketing Intern</h3>
+          <p><strong style="color:#fff">NT Engineering and Data Services</strong><br>
+          Part-time · April 2025 – June 2025</p>
+          <div class="tags"><span>Marketing</span><span>Part-time</span><span>Internship</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">02 / TECH</span>
+          <h3>Tech Intern</h3>
+          <p><strong style="color:#fff">Evertyze AI PR</strong><br>
+          On-site · July 2025 – September 2025 · 3 months</p>
+          <div class="tags"><span>Technology</span><span>On-site</span><span>3 Months</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">03 / FRONT-END</span>
+          <h3>Front-End Developer Intern</h3>
+          <p><strong style="color:#fff">Company Name To Be Added</strong><br>
+          Remote · Lahore, Punjab, Pakistan · March 2026 – April 2026 · 2 months</p>
+          <div class="tags"><span>Front-End</span><span>Remote</span><span>Web Development</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">04 / EMAIL MARKETING</span>
+          <h3>Email Marketing Manager Intern</h3>
+          <p><strong style="color:#fff">Gaoprift</strong><br>
+          February 2026 – May 2026 · 4 months</p>
+          <div class="tags"><span>Email Marketing</span><span>Campaigns</span><span>4 Months</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">05 / DEVELOPMENT</span>
+          <h3>Developer Hub Intern</h3>
+          <p><strong style="color:#fff">Developer Hub</strong><br>
+          Remote · May 2026 – June 2026</p>
+          <div class="tags"><span>Development</span><span>Remote</span><span>Internship</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">06 / PAID AI</span>
+          <h3>AI Intern</h3>
+          <p><strong style="color:#fff">Company Name To Be Added</strong><br>
+          Paid · On-site · July 15, 2026 – August 25, 2026</p>
+          <div class="tags"><span>Artificial Intelligence</span><span>Paid</span><span>On-site</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-head"><h2>Featured Projects</h2><p>Selected portfolio work</p></div>
+      <div class="project-grid">
+        <div class="card project">
+          <span class="num">01 / E-COMMERCE</span>
+          <h3>E-Commerce Application</h3>
+          <p>Designed and developed an e-commerce application focused on product browsing, user-friendly navigation and a clean shopping experience.</p>
+          <div class="tags"><span>Web App</span><span>E-Commerce</span><span>UI/UX</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">02 / WEBSITE APP</span>
+          <h3>iCelo Website Application</h3>
+          <p>Built a website-based application for iCelo with a structured interface, responsive layout and practical front-end functionality.</p>
+          <div class="tags"><span>Website</span><span>Front-End</span><span>Responsive</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">03 / PR APP</span>
+          <h3>Press Release Application</h3>
+          <p>Created a press release application to organize and present press-release content in a clear, usable and professional format.</p>
+          <div class="tags"><span>Web App</span><span>Content</span><span>Interface Design</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">04 / RAG</span>
+          <h3>RAG Project</h3>
+          <p>Worked on a Retrieval-Augmented Generation (RAG) project to combine information retrieval with AI-generated responses for more relevant and context-aware outputs.</p>
+          <div class="tags"><span>RAG</span><span>AI</span><span>Information Retrieval</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">05 / SLM</span>
+          <h3>SLM Project</h3>
+          <p>Developed an SLM-based project as part of hands-on learning in software and AI-oriented development workflows.</p>
+          <div class="tags"><span>SLM</span><span>AI</span><span>Project Development</span></div>
+        </div>
+
+        <div class="card project">
+          <span class="num">06 / PRODUCTIVITY</span>
+          <h3>To-Do List Application</h3>
+          <p>Built a practical to-do list application for creating, organizing and managing daily tasks through a simple and efficient interface.</p>
+          <div class="tags"><span>Productivity</span><span>App</span><span>Task Management</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="section-head"><h2>Education & Experience</h2><p>Your journey</p></div>
+      <div class="grid-2">
+        <div class="card content-card">
+          <h3>Education</h3>
+          <div class="timeline">
+            <div class="item"><h4>BS Computer Science</h4><p>University Name · In Progress</p></div>
+            <div class="item"><h4>Intermediate — Pre-Medical</h4><p>855 Marks · College Name</p></div>
+            <div class="item"><h4>Matric / 10th — Biology</h4><p>789 Marks · School Name</p></div>
+          </div>
+        </div>
+        <div class="card content-card">
+          <h3>Internship Highlights</h3>
+          <div class="timeline">
+            <div class="item"><h4>AI Intern — Paid</h4><p>On-site · Jul 15, 2026 – Aug 25, 2026</p></div>
+            <div class="item"><h4>Developer Hub Intern</h4><p>Remote · May 2026 – Jun 2026</p></div>
+            <div class="item"><h4>Email Marketing Manager Intern — Gaoprift</h4><p>Feb 2026 – May 2026 · 4 months</p></div>
+            <div class="item"><h4>Front-End Developer Intern</h4><p>Remote, Lahore · Mar 2026 – Apr 2026 · 2 months</p></div>
+            <div class="item"><h4>Tech Intern — Evertyze AI PR</h4><p>On-site · Jul 2025 – Sep 2025 · 3 months</p></div>
+            <div class="item"><h4>Marketing Intern — NT Engineering and Data Services</h4><p>Part-time · Apr 2025 – Jun 2025</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="blog">
+      <div class="section-head">
+        <h2>My Journey & Portfolio Blog</h2>
+        <p>Learning, experience and growth</p>
+      </div>
+
+      <div class="card content-card" style="padding:30px;">
+        <div class="eyebrow">PERSONAL BLOG</div>
+        <h3 style="font-size:26px; margin:12px 0 8px;">From Learning to Building: My Journey in Computer Science</h3>
+        <p style="font-size:12px; color:#8be9f5; margin-bottom:22px;">By Aliha Khan · Portfolio Journey</p>
+
+        <p>
+          My journey in technology has been a gradual process of learning, experimenting and turning ideas into practical work.
+          I am currently studying BS Computer Science, and over time I have developed a strong interest in web development,
+          artificial intelligence, digital tools and problem-solving. My portfolio represents the progress I have made through
+          education, internships and hands-on projects.
+        </p>
+
+        <p>
+          Before entering the field of Computer Science, my academic background was in Biology and Pre-Medical. I completed
+          Matric with Biology and scored 789 marks, followed by Intermediate in Pre-Medical with 855 marks. Moving from a
+          medical background into Computer Science became an important turning point for me because it gave me the opportunity
+          to explore technology from a completely new perspective.
+        </p>
+
+        <p>
+          Practical experience has played a major role in my learning. I completed multiple internships in different areas,
+          including marketing, technology, front-end development, email marketing, development and artificial intelligence.
+          These experiences helped me understand how professional teams work and gave me exposure to both technical and
+          communication-based roles. My internship journey includes work with NT Engineering and Data Services, Evertyze AI PR,
+          Gaoprift and Developer Hub, along with front-end and paid AI internship experience.
+        </p>
+
+        <p>
+          Alongside internships, I worked on a number of projects to improve my technical skills. I created an E-Commerce
+          Application, an iCelo Website Application, a Press Release Application, a RAG project, an SLM project and a
+          To-Do List Application. Each project helped me understand a different part of software development, whether it was
+          interface design, web applications, AI-based workflows, information retrieval or task management.
+        </p>
+
+        <p>
+          One of the most important projects for me is this personal portfolio dashboard. I created it to organize my education,
+          skills, internships, projects and professional links in one place. The dashboard is built using HTML, CSS and
+          JavaScript. HTML provides the structure, CSS gives the website its visual design and responsive layout, and JavaScript
+          improves navigation and interaction. I also made the portfolio responsive so it can be viewed on both desktop and
+          mobile devices.
+        </p>
+
+        <p>
+          This portfolio is not only a record of what I have already completed; it is also a space that I can continue updating
+          as I learn new technologies, complete new internships and build stronger projects. My goal is to keep improving my
+          technical skills, gain more practical experience and build solutions that are useful, professional and meaningful.
+        </p>
+
+        <div style="margin-top:24px; padding:18px; border:1px solid var(--line); border-radius:14px; background:rgba(139,92,246,.08);">
+          <strong style="color:#fff;">What this portfolio reflects</strong>
+          <p style="margin-bottom:0;">
+            Continuous learning, adaptability, practical experience, interest in AI and web development, and a growing
+            professional identity in the field of Computer Science.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-head"><h2>Contact</h2><p>Let's connect</p></div>
+      <div class="card content-card">
+        <p><strong style="color:#fff">Email:</strong> <a href="mailto:aliha.k@gmail.com" style="color:#8be9f5;text-decoration:none;">aliha.k@gmail.com</a></p>
+                <p><strong style="color:#fff">LinkedIn:</strong> <a href="https://www.linkedin.com/in/aliha-k-958343333?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" style="color:#8be9f5;text-decoration:none;">View LinkedIn Profile</a></p>
+        <p><strong style="color:#fff">GitHub:</strong> <a href="https://github.com/Alihakhanlodhi/my-work.git" target="_blank" style="color:#8be9f5;text-decoration:none;">View GitHub Portfolio</a></p>
+      </div>
+    </section>
+
+    <footer>© 2026 Aliha Khan — Personal Portfolio Dashboard</footer>
+  </main>
+</div>
+
+<script>
+  const links = [...document.querySelectorAll('nav a')];
+  const sections = [...document.querySelectorAll('main section')];
+  window.addEventListener('scroll', () => {
+    let current = 'home';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - 140) current = sec.id;
+    });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+</script>
+</body>
+</html>
